@@ -1,18 +1,53 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import { Sidebar, Segment, Button, Menu, Icon } from 'semantic-ui-react';
+import MemberList from './components/MemberList';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = { visible: false };
+    this.toggleVisibility = this.toggleVisibility.bind(this);
+  }
+
+  toggleVisibility() {
+    this.setState({ visible: !this.state.visible });
+  }
+
   render() {
+    const { visible } = this.state;
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <Button onClick={this.toggleVisibility}>Toggle Visibility</Button>
+        <Sidebar.Pushable as={Segment}>
+          <Sidebar
+            as={Menu}
+            animation="push"
+            width="thin"
+            visible={visible}
+            icon="labeled"
+            vertical
+            inverted
+          >
+            <Menu.Item name="home">
+              <Icon name="home" />
+              Home
+            </Menu.Item>
+            <Menu.Item name="gamepad">
+              <Icon name="gamepad" />
+              Games
+            </Menu.Item>
+            <Menu.Item name="camera">
+              <Icon name="camera" />
+              Channels
+            </Menu.Item>
+          </Sidebar>
+          <Sidebar.Pusher>
+            <Segment basic>
+              <MemberList members={[{ image: 'cacat' }]} />
+            </Segment>
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
       </div>
     );
   }
