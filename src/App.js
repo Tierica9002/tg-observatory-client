@@ -1,23 +1,27 @@
 import React, { Component } from 'react';
-
 import { Sidebar, Segment, Button, Menu, Icon } from 'semantic-ui-react';
+
+import './App.css';
 import MemberList from './components/MemberList';
+import Graph from './components/Graph';
 
 class App extends Component {
   constructor() {
     super();
-    this.state = { visible: false };
-    this.toggleVisibility = this.toggleVisibility.bind(this);
+    this.state = {
+      visible: false,
+    };
   }
 
-  toggleVisibility() {
+  toggleVisibility = () => {
     this.setState({ visible: !this.state.visible });
   }
 
   render() {
     const { visible } = this.state;
+
     return (
-      <div>
+      <div className="app">
         <Button onClick={this.toggleVisibility}>Toggle Visibility</Button>
         <Sidebar.Pushable as={Segment}>
           <Sidebar
@@ -44,6 +48,7 @@ class App extends Component {
           </Sidebar>
           <Sidebar.Pusher>
             <Segment basic>
+              <Graph />
               <MemberList members={[{ image: 'cacat' }]} />
             </Segment>
           </Sidebar.Pusher>
