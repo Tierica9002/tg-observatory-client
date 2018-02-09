@@ -14,8 +14,8 @@ class App extends Component {
   }
 
   toggleVisibility = () => {
-    this.setState({ visible: !this.state.visible });
-  }
+    this.setState(prevState => ({ visible: !prevState.visible }));
+  };
 
   render() {
     const { visible } = this.state;

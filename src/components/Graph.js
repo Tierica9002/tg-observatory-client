@@ -3,6 +3,13 @@ import { BarChart, XAxis, YAxis, Legend, Tooltip, CartesianGrid, Bar } from 'rec
 
 import mockData from '../mocks/chartData';
 
+const margin = {
+  top: 5,
+  right: 30,
+  left: 20,
+  bottom: 5,
+};
+
 export default class Graph extends Component {
   constructor() {
     super();
@@ -12,24 +19,13 @@ export default class Graph extends Component {
   }
   render() {
     return (
-      <BarChart
-        width={600}
-        height={300}
-        data={this.state.data}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
+      <BarChart width={600} height={300} data={this.state.data} margin={margin}>
         <XAxis dataKey="name" />
-        <YAxis />
+        <YAxis dataKey="messagesCount" />
         <CartesianGrid strokeDasharray="3 3" />
         <Tooltip />
         <Legend />
-        <Bar dataKey="pv" fill="#8884d8" />
-        <Bar dataKey="uv" fill="#82ca9d" />
+        <Bar dataKey="messagesCount" fill="#8884d8" label="Messages" />
       </BarChart>
     );
   }
