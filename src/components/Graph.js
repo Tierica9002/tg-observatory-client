@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import { BarChart, XAxis, YAxis, Legend, Tooltip, CartesianGrid, Bar } from 'recharts';
-
+import openSocket from 'socket.io-client';
 import mockData from '../mocks/chartData';
+
+const socket = openSocket('http://localhost:5000');
+
+function subscribeToMessages(cb) {
+  socket.on('new_message', message => cb(null, message));
+  // socket.emit('subscribeToTimer', 1000);
+}
+
 
 const margin = {
   top: 5,
@@ -16,6 +24,20 @@ export default class Graph extends Component {
     this.state = {
       data: mockData,
     };
+
+    subscribeToMessages((err, message) => this.setState(prevState => {
+      return {
+        data: prevState.data.map(item => {
+          if (item.tgUserId === message) {
+            return {
+              ...item,
+              messagesCount: item.messagesCount + 1
+            }
+          }
+          return item;
+        })
+      };
+    }));
   }
   render() {
     return (

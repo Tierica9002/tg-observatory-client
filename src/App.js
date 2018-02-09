@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Sidebar, Segment, Button, Menu, Icon } from 'semantic-ui-react';
 
 import './App.css';
-import MemberList from './components/MemberList';
 import Graph from './components/Graph';
 
 class App extends Component {
@@ -49,7 +48,6 @@ class App extends Component {
           <Sidebar.Pusher>
             <Segment basic>
               <Graph />
-              <MemberList members={[{ image: 'cacat' }]} />
             </Segment>
           </Sidebar.Pusher>
         </Sidebar.Pushable>
